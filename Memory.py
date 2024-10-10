@@ -13,6 +13,9 @@ asterisc_values = []
 for i in range(1,37):
     asterisc_values += ["*"]
 
+def turn(x,y): #Funcion para cambiar el asterisco por el valor
+    asterisc_list[x][y] = cards_list[x][y]
+
 
 #Esta funcion se encarga de generar las listas 2D usando los intervalos de 6 en 6 y un while loop. Como parametro toma una lista original, que en este caso puede ser card_values o asterisc_values.
 def sublist_generator(original_list):
@@ -30,7 +33,38 @@ cards_list = sublist_generator(card_values) #Para crear la lista 2D de cartas us
 print(cards_list) #Prueba
 
 asterisc_list = sublist_generator(asterisc_values) #Hacemos lo mismo, para crear la lista 2D de asteriscos 
-for i in asterisc_list: #Usamos nuestra lista 2D de asteriscos en este loop para crear el tablero 
-    print()
-    for j in i:
-        print(j,end=" ") 
+
+
+p1= 0
+p2= 0 #Variables jugadores
+
+while True:
+    for i in asterisc_list: 
+        print()
+        for j in i:
+            print(j,end=" ") #Se imprime el tablero
+    x1= int(input("x"))
+    y1= int(input("y")) #Se preguntan las coordenadas
+    turn(x1-1,y1-1)
+    for i in asterisc_list:
+        print()
+        for j in i:
+            print(j,end=" ") #Se imprime el tablero con el primer valor
+    x2= int(input("x"))
+    y2= int(input("y")) #Se preguntan las segundas coordenadas
+    turn(x2-1,y2-1)
+    for i in asterisc_list:
+        print()
+        for j in i:
+            print(j,end=" ") #Se imprime el tablero con ambos valores
+    break
+
+
+if cards_list[x1][y2] == cards_list[x2][y2]:
+    p1 += 1 
+else:
+    p1 += 0
+print(p1) #Si ambos valores son iguales, se sumara un punto, si no, no se sumara nada
+    
+
+
