@@ -15,7 +15,26 @@ for i in range(1,37):
 
 def turn(x,y): #Funcion para cambiar el asterisco por el valor
     asterisc_list[x][y] = cards_list[x][y]
+    for i in asterisc_list: 
+        print()
+        for j in i:
+            print(j,end=" ") #Se imprime el tablero
 
+def board():
+    for i in asterisc_list: 
+        print()
+        for j in i:
+            print(j,end=" ") #Se imprime el tablero
+    
+def correct(y1,x1,y2,x2):
+    if cards_list[y1][x1] == cards_list[y2][x2]:
+        asterisc_list[y1][x1] = cards_list[y1][x1]
+        asterisc_list[y2][x2] = cards_list[y2][x2]
+    else:
+        asterisc_list[y1][x1] = "*"
+        asterisc_list[y2][x2] = "*"
+    
+    
 
 #Esta funcion se encarga de generar las listas 2D usando los intervalos de 6 en 6 y un while loop. Como parametro toma una lista original, que en este caso puede ser card_values o asterisc_values.
 def sublist_generator(original_list):
@@ -38,33 +57,49 @@ asterisc_list = sublist_generator(asterisc_values) #Hacemos lo mismo, para crear
 p1= 0
 p2= 0 #Variables jugadores
 
+board()
+
 while True:
-    for i in asterisc_list: 
-        print()
-        for j in i:
-            print(j,end=" ") #Se imprime el tablero
-    x1= int(input("x"))
-    y1= int(input("y")) #Se preguntan las coordenadas
-    turn(x1-1,y1-1)
-    for i in asterisc_list:
-        print()
-        for j in i:
-            print(j,end=" ") #Se imprime el tablero con el primer valor
-    x2= int(input("x"))
-    y2= int(input("y")) #Se preguntan las segundas coordenadas
-    turn(x2-1,y2-1)
-    for i in asterisc_list:
-        print()
-        for j in i:
-            print(j,end=" ") #Se imprime el tablero con ambos valores
-    break
+    print()
+    y1= int(input("y"))
+    x1= int(input("x")) #Se preguntan las coordenadas
+    turn(y1-1,x1-1)
+    print()
+    y2= int(input("y"))
+    x2= int(input("x")) #Se preguntan las segundas coordenadas
+    turn(y2-1,x2-1)
+    print()
+    if cards_list[y1-1][x1-1] == cards_list[y2-1][x2-1]:
+        p1 += 1
+    else:
+        p1 += 0
+        asterisc_list[y1-1][x1-1] = "*"
+        asterisc_list[y2-1][x2-1] = "*"
+    print(p1) #Si ambos valores son iguales, se sumara un punto, si no, no se sumara nada
+    print()
+    y1= int(input("y"))
+    x1= int(input("x")) #Se preguntan las coordenadas
+    turn(y1-1,x1-1)
+    print()
+    y2= int(input("y"))
+    x2= int(input("x")) #Se preguntan las segundas coordenadas
+    turn(y2-1,x2-1)
+    print()
+    if cards_list[y1-1][x1-1] == cards_list[y2-1][x2-1]:
+        p2 += 1
+    else:
+        p2 += 0
+        asterisc_list[y1-1][x1-1] = "*"
+        asterisc_list[y2-1][x2-1] = "*"
+    print(p2)
+    if p1+p2 == 18:
+        break
+    
+    
+    
 
 
-if cards_list[x1][y2] == cards_list[x2][y2]:
-    p1 += 1 
-else:
-    p1 += 0
-print(p1) #Si ambos valores son iguales, se sumara un punto, si no, no se sumara nada
+
     
 
 
