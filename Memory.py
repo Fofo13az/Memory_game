@@ -33,8 +33,14 @@ def correct(y1,x1,y2,x2):
     else:
         asterisc_list[y1][x1] = "*"
         asterisc_list[y2][x2] = "*"
-    
-    
+        
+def equal(y,x):
+    if asterisc_list[y][x] != "*":
+        count=+1
+    else:
+        count=+0
+    return count
+
 
 #Esta funcion se encarga de generar las listas 2D usando los intervalos de 6 en 6 y un while loop. Como parametro toma una lista original, que en este caso puede ser card_values o asterisc_values.
 def sublist_generator(original_list):
@@ -56,50 +62,95 @@ asterisc_list = sublist_generator(asterisc_values) #Hacemos lo mismo, para crear
 
 p1= 0
 p2= 0 #Variables jugadores
+count= 0
+decision= ""
 
 board()
 
 while True:
     print()
-    y1= int(input("y"))
-    x1= int(input("x")) #Se preguntan las coordenadas
-    turn(y1-1,x1-1)
+    print("--Player 1 turn--")
     print()
-    y2= int(input("y"))
-    x2= int(input("x")) #Se preguntan las segundas coordenadas
-    turn(y2-1,x2-1)
+    y1= int(input("Type the number on the y axis: ")) -1
+    x1= int(input("Type the number on the x axis: ")) -1 #Se preguntan las coordenadas
+    if y1 > 6 or x1 > 6:
+        print("Invalid syntax")
+        continue
+    equal(y1,x1)
+    turn(y1,x1)
     print()
-    if cards_list[y1-1][x1-1] == cards_list[y2-1][x2-1]:
-        p1 += 1
+    y2= int(input("Type the number on the y axis: ")) -1
+    x2= int(input("Type the number on the x axis: ")) -1 #Se preguntan las segundas coordenadas
+    if y2 > 6 or x2 > 6:
+        print("Invalid syntax")
+        continue
+    equal(y2,x2)
+    turn(y2,x2)
+    print()
+    if cards_list[y1][x1] == cards_list[y2][x2]:
+        if count > 0:
+            p1 += 0
+            print(count)
+            print("You typed numbers that were already unveiled, cheater")
+        else:
+            p1 += 1
+            print(f"You got 1 point!, you now have {p1} points")
     else:
         p1 += 0
-        asterisc_list[y1-1][x1-1] = "*"
-        asterisc_list[y2-1][x2-1] = "*"
-    print(p1) #Si ambos valores son iguales, se sumara un punto, si no, no se sumara nada
+        asterisc_list[y1][x1] = "*"
+        asterisc_list[y2][x2] = "*"
+        print(f"You got it wrong, you still hace {p1} points")
     print()
-    y1= int(input("y"))
-    x1= int(input("x")) #Se preguntan las coordenadas
-    turn(y1-1,x1-1)
+    print("--Player 2 turn--")
     print()
-    y2= int(input("y"))
-    x2= int(input("x")) #Se preguntan las segundas coordenadas
-    turn(y2-1,x2-1)
+    y1= int(input("Type the number on the y axis: ")) -1
+    x1= int(input("Type the number on the x axis: ")) -1 #Se preguntan las coordenadas
+    if y1 > 6 or x1 > 6:
+        print("Invalid syntax")
+        continue
+    equal(y1,x1)
+    turn(y1,x1)
     print()
-    if cards_list[y1-1][x1-1] == cards_list[y2-1][x2-1]:
-        p2 += 1
+    y2= int(input("Type the number on the y axis: ")) -1
+    x2= int(input("Type the number on the x axis: ")) -1 #Se preguntan las segundas coordenadas
+    if y2 > 6 or x2 > 6:
+        print("Invalid syntax")
+        continue
+    equal(y1,x2)
+    turn(y2,x2)
+    print()
+    if cards_list[y1][x1] == cards_list[y2][x2]:
+        if count > 0:
+            p2 += 0
+            count = 0
+            print("You typed numbers that were already unveiled")
+        else:
+            p2 += 1
+            print(f"You got 1 point!, you now have {p2} points")
     else:
         p2 += 0
-        asterisc_list[y1-1][x1-1] = "*"
-        asterisc_list[y2-1][x2-1] = "*"
-    print(p2)
-    if p1+p2 == 18:
+        asterisc_list[y1][x1] = "*"
+        asterisc_list[y2][x2] = "*"
+        print(f"You got it wrong, you still hace {p2} points")
+    print("Do you want to continue?")
+    decision = input("Press C to continue or E to exit") 
+    if p1+p2 == 18 or decision == "E":
         break
+    else:
+        continue
+
+
+print("GAME OVER")
+if p1 > p2:
+    print(f"Player 1 points: {p1}")
+    print(f"Player 2 pointa: {p2}")
+    print("Congratulations Player 1, you won!!!")
+elif p2 > p1:
+    print(f"Player 1 points: {p1}")
+    print(f"Player 2 pointa: {p2}")
+    print("Congratulations Player 2, you won!!!")
+else:
+    print(f"Player 1 points: {p1}")
+    print(f"Player 2 pointa: {p2}")
+    print("You tied!")
     
-    
-    
-
-
-
-    
-
-
