@@ -97,25 +97,32 @@ cards_list = sublist_generator(card_values) #It divides the card_list into 6 lis
 asterisc_list = sublist_generator(asterisc_values) #It divides the asterisc_list into 6 lists of 6 values each
 player1 = 0
 player1Name = "Player 1"
-player2 = 0 
+player2 = 0
 player2Name = "Player 2"
 numbers_foundList = [] #A list that almacenats the values that were already found
+mainMenu_selection = 0
 
 print("Welcome to Memory game!")
 print("Created by: Adolfo Hernández and Alonso Arechiga")
 print("-----------------------")
 
 while True:
-
+    if mainMenu_selection == 3:
+        break
     print("Main menu")
     mainMenu_selection = int(input("Select an option: 1. Play / 2. Read rules / 3. Exit: "))
-    
     if mainMenu_selection == 1: #If the player wants to play
-        #print(cards_list) PRUEBA
+        #print(cards_list) 
         board()
         while True:
             player1 += game(player1Name)
+            if player1 + player2 == 18:
+                mainMenu_selection = 3
+                break
             player2 += game(player2Name) #It does a turn for each player
+            if player1 + player2 == 18:
+                mainMenu_selection = 3
+                break
             print()
             print(f"Current score: Player 1: {player1} | Player 2: {player2}")
             decision = int(input("Do you want to continue? 1. Yes | 2. No: "))
@@ -144,7 +151,13 @@ while True:
             board()
             while True:
                 player1 += game(player1Name)
+                if player1 + player2 == 18:
+                    mainMenu_selection = 3
+                    break
                 player2 += game(player2Name) #It does a turn for each player
+                if player1 + player2 == 18:
+                    mainMenu_selection = 3
+                    break
                 print()
                 print(f"Current score: Player 1: {player1} | Player 2: {player2}")
                 decision = int(input("Do you want to continue? 1. Yes | 2. No: "))
