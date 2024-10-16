@@ -73,23 +73,29 @@ def game(playername):
         print()
         guess2_value = turn(y2,x2) #This almacenates the second position
         print()
-        if guess1_value != guess2_value: #If the card values are not the same
-            print()
-            print("Incorrect!")
-            print()
+        if x1 == x2 and y1 == y2: #Here it checks if you put the same position
+            print("Cheater! You get no points.")
             unturn(y1,x1,y2,x2) #It turns back the values to asterisc
             player_score += 0 #You get 0 points
             break
-        else: #If the card values are the same
-            if guess1_value not in numbers_foundList and guess2_value not in numbers_foundList: #And the values are not in the found list
-                player_score += 1 #You get 1 point
-                numbers_foundList.append(guess1_value)
-                numbers_foundList.append(guess2_value) #The values get added to the found list
+        else: #If the position is different
+            if guess1_value != guess2_value: #If the card values are not the same
+                print()
+                print("Incorrect!")
+                print()
+                unturn(y1,x1,y2,x2) #It turns back the values to asterisc
+                player_score += 0 #You get 0 points
                 break
-            else: #If the values are in the found list
-                player_score += 0
-                print("Cheater! You get no points.") #The player put repeated numbers so he gets no points
-                break
+            else: #If the card values are the same
+                if guess1_value not in numbers_foundList and guess2_value not in numbers_foundList: #And the values are not in the found list
+                    player_score += 1 #You get 1 point
+                    numbers_foundList.append(guess1_value)
+                    numbers_foundList.append(guess2_value) #The values get added to the found list
+                    break
+                else: #If the values are in the found list
+                    player_score += 0
+                    print("Cheater! You get no points.") #The player put repeated numbers so he gets no points
+                    break
     return player_score #It returns if the player won any points
 
 
@@ -107,18 +113,18 @@ print("Created by: Adolfo Hernández and Alonso Arechiga")
 print("-----------------------")
 
 while True:
-    if mainMenu_selection == 3:
+    if mainMenu_selection == 3: #This is to end the loop if all cards have been turned up
         break
     print("Main menu")
     mainMenu_selection = int(input("Select an option: 1. Play / 2. Read rules / 3. Exit: "))
     if mainMenu_selection == 1: #If the player wants to play
-        #print(cards_list) 
+        #print(cards_list) PRUEBA
         board()
         while True:
             player1 += game(player1Name)
-            if player1 + player2 == 18:
-                mainMenu_selection = 3
-                break
+            if player1 + player2 == 18: #If all cards have been turned up
+                mainMenu_selection = 3 #It makes the menu selection 3 to break the first loop
+                break #It ends this one
             player2 += game(player2Name) #It does a turn for each player
             if player1 + player2 == 18:
                 mainMenu_selection = 3
@@ -151,12 +157,12 @@ while True:
             board()
             while True:
                 player1 += game(player1Name)
-                if player1 + player2 == 18:
-                    mainMenu_selection = 3
-                    break
+                if player1 + player2 == 18: #If all cards have been turned up
+                    mainMenu_selection = 3 #It makes the menu selection 3 to break the first loop
+                    break #It ends this one
                 player2 += game(player2Name) #It does a turn for each player
                 if player1 + player2 == 18:
-                    mainMenu_selection = 3
+                    mainMenu_selection = 3 
                     break
                 print()
                 print(f"Current score: Player 1: {player1} | Player 2: {player2}")
