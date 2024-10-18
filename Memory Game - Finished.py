@@ -83,6 +83,7 @@ def game(playername):
             print("Cheater! That one is already opened.")
             player_score = 0
             asterisc_list[y1][x1] = "*" #It turns the original position back to asterisc
+            board()
             break
         if x1 == x2 and y1 == y2: #Here it checks if you put the same position
             print("Cheater! You get no points.")
@@ -119,6 +120,7 @@ player2Name = "Player 2"
 numbers_foundList = [] #A list that almacenats the values that were already found
 mainMenu_selection = 0
 
+
 print("Welcome to Memory game!")
 print("Created by: Adolfo Hernández and Alonso Arechiga")
 print("-----------------------")
@@ -129,7 +131,7 @@ while True:
     print("Main menu")
     mainMenu_selection = int(input("Select an option: 1. Play / 2. Read rules / 3. Exit: "))
     if mainMenu_selection == 1: #If the player wants to play
-        print(cards_list) 
+        #print(cards_list) PRUEBA
         board()
         while True:
             player1 += game(player1Name)
@@ -164,7 +166,7 @@ while True:
             print("Invalid option, try again")
             selection = int(input("1. Play / 2. Back to main menu: "))
         if selection == 1: #If the player wants to play
-            print(cards_list)
+            #print(cards_list) PRUEBA
             board()
             while True:
                 player1 += game(player1Name)
