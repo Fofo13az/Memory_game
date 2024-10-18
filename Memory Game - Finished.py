@@ -65,6 +65,11 @@ def game(playername):
             continue #If not, it ask you the position again
         guess1_value = turn(y1,x1) #This almacenates the first position
         print()
+        if guess1_value in numbers_foundList: #It checks if the value is already opened
+            print()
+            print("Cheater! That one is already opened.")
+            player_score = 0
+            break
         y2= int(input("Select the second row!: ")) -1
         x2= int(input("Select the second column!: ")) -1  #You select the second position
         if y2 >= 6 or x2 >= 6 or y2+1<=0 or x2+1<= 0: #Here it checks if the position is valid or not
@@ -73,6 +78,12 @@ def game(playername):
         print()
         guess2_value = turn(y2,x2) #This almacenates the second position
         print()
+        if guess2_value in numbers_foundList: #It checks if the value is already opened
+            print()
+            print("Cheater! That one is already opened.")
+            player_score = 0
+            asterisc_list[y1][x1] = "*" #It turns the original position back to asterisc
+            break
         if x1 == x2 and y1 == y2: #Here it checks if you put the same position
             print("Cheater! You get no points.")
             unturn(y1,x1,y2,x2) #It turns back the values to asterisc
@@ -118,7 +129,7 @@ while True:
     print("Main menu")
     mainMenu_selection = int(input("Select an option: 1. Play / 2. Read rules / 3. Exit: "))
     if mainMenu_selection == 1: #If the player wants to play
-        #print(cards_list) PRUEBA
+        print(cards_list) 
         board()
         while True:
             player1 += game(player1Name)
@@ -153,7 +164,7 @@ while True:
             print("Invalid option, try again")
             selection = int(input("1. Play / 2. Back to main menu: "))
         if selection == 1: #If the player wants to play
-            #print(cards_list) PRUEBA
+            print(cards_list)
             board()
             while True:
                 player1 += game(player1Name)
